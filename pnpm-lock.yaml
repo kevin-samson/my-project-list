@@ -26,9 +26,6 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
-  remark-mermaid-nextra:
-    specifier: ^0.0.4
-    version: 0.0.4(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -2273,21 +2270,6 @@ packages:
       - supports-color
     dev: false
 
-  /remark-mermaid-nextra@0.0.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-7uPzLRxyfsIBjbsHfaOQy/JSUpE6cwcwvu1HYr8Rz3asY4rvQdRHUZoNyALrqEETvDvXzUpkqD5CZOrX76RzQQ==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      react: ^16.8 || ^17 || ^18
-      react-dom: ^16.8 || ^17 || ^18
-    dependencies:
-      mermaid: 10.9.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      unist-util-visit: 4.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /remark-parse@10.0.1:
     resolution: {integrity: sha512-1fUyHr2jLsVOkhbvPRBJ5zTKZZyD6yZzYaWCS6BPBdQ8vEMBCH+9zNCDA6tET/zHCi/jLqjCWtlJZUPk+DbnFw==}
     dependencies:
@@ -2610,14 +2592,6 @@ packages:
 
   /unist-util-visit@4.1.1:
     resolution: {integrity: sha512-n9KN3WV9k4h1DxYR1LoajgN93wpEi/7ZplVe02IoB4gH5ctI1AaF2670BLHQYbwj+pY83gFtyeySFiyMHJklrg==}
-    dependencies:
-      '@types/unist': 2.0.6
-      unist-util-is: 5.1.1
-      unist-util-visit-parents: 5.1.1
-    dev: false
-
-  /unist-util-visit@4.1.2:
-    resolution: {integrity: sha512-MSd8OUGISqHdVvfY9TPhyK2VdUrPgxkUtWSuMHF6XAAFuL4LokseigBnZtPnJMu+FbynTkFNnFlyjxpVKujMRg==}
     dependencies:
       '@types/unist': 2.0.6
       unist-util-is: 5.1.1
