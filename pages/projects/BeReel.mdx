@@ -1,0 +1,103 @@
+import Image from "next/image";
+
+# BeReel - A timelapse maker for BeReal
+A Flask-based webtool that gives you a customized timelapse of your favourite BeReal memories.
+
+View the code on [GitHub](https://github.com/kevin-samson/BITS-Calendar-Maker)
+
+<Image src="/images/BeReal.png" alt="BeReal" width={1000} height={1000}/>
+
+## Backgroud
+By the end of 2022, BeReal combined all the photos taken in a year and made a timelape. However, for some reason the timelapce was stopped in 2023.
+Searching across the internet, I came accross this project made by [theOneAndOnlyOne](https://github.com/theOneAndOnlyOne). It did not give the output I wanted, so I decided to decided to folk the project and make my own version of it.
+
+## Generating the 1st two seconds
+The first two second is all the photos taken put into 2 second. This is done by using the `opencv` and `moviepy` library. Also, a text is overlayed on top of the image.
+
+### Appending images together
+```py filename="recap.py" copy
+part1 = ImageSequenceClip(images, durations=[2 / len(images)] * len(images))
+part1.write_videofile("part1.mp4", fps=frames_per_second)
+```
+$(2 / len(images)) * len(images)$ is the duration of each image. This is done to make sure that the video is 2 seconds long. 
+
+### Adding text to the video
+```py filename="recap.py" copy
+cap = cv2.VideoCapture("part1.mp4")
+fps = int(cap.get(cv2.CAP_PROP_FPS))
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+out = cv2.VideoWriter(
+    "output.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, (width, height)
+)
+while cap.isOpened():
+    ret, frame = cap.read()
+    if ret == True:
+        frame = add_text_to_frame(
+            frame,
+            "RECAP 2023",
+            200,
+            width,
+            height,
+            text_color=(255, 255, 255),
+        )
+        out.write(frame)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
+    else:
+        break
+```
+`add_text_to_frame` is a function that adds text to the frame. The text is "RECAP 2023" and the color is white.
+
+### Generating the blank screen
+The blank screen is like a transition and it has "RECAP 2023" in the middle. This is done by using the `opencv` library.
+
+```py filename="recap.py" copy
+blank = np.zeros((height, width, 3), np.uint8)
+blank = add_text_to_frame(
+    blank,
+    "RECAP 2023",
+    200,
+    width,
+    height,
+    text_color=(255, 255, 255),
+)
+```
+Each pixel in the image is set to 0. Then the text is added to the image.
+
+## Generating the rest of the video
+The rest of the video is the timelapse of all the photos and the time between each photo follows a bezier curve. This is done by using the `moviepy` library.
+
+### Generating the bezier curve
+```py filename="recap.py" copy
+def bezier_curve(t, p0, p1, p2, p3):
+    return (
+        (1 - t) ** 3 * p0
+        + 3 * (1 - t) ** 2 * t * p1
+        + 3 * (1 - t) * t**2 * p2
+        + t**3 * p3
+    )
+```
+
+### Generating the timelapse
+```py filename="recap.py" copy
+part2 = ImageSequenceClip(images, durations=durations)
+```
+`durations` is the time between each photo. This is calculated using the bezier curve.
+
+## Combining the videos
+The two videos are combined using the `moviepy` library.
+
+```py filename="recap.py" copy
+    final_clip = concatenate_videoclips(clips, method="chain")
+    final_clip.write_videofile(
+        output_path, fps=frames_per_second, threads=6, codec="libx264"
+    )
+```
+Finally, the temp video is deleted.
+
+```python filename="recap.py" copy
+os.remove("part1.mp4")
+```
+

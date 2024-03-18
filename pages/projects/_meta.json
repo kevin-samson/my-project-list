@@ -1,0 +1,13 @@
+{
+    "index":{
+        "title": "Projects",
+        "theme": {
+            "typesetting": "article",
+            "breadcrumb": false
+          }
+    },
+    "BITS": {
+        "title": "BITS Calendar Maker"
+    },
+    "BeReel": "BeReel"
+}
