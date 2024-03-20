@@ -1,0 +1,93 @@
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Higher-Lower Bot
+
+
+A Python Bot that automates the Higher-Lower game
+<Image src="/images/highlow.png" width={500} height={250}/>
+
+View the code on [GitHub](https://github.com/kevin-samson/higherlower-bot)
+
+Play the game [here](https://www.higherlowergame.com/)
+
+## Game Mechanics
+The Higher Lower game is a guessing game that tests your knowledge of search popularity. Here's how it works:
+- You are given two options and the average monthly search is displayed for one of the options
+- The goal is to guess which option has been searched for more
+- You choose **"Higher"** or **"Lower"** based on your guess.
+- After your guess, the game reveals the correct answer and presents a new pair of options.
+- You keep playing until you guess incorrectly. The aim is to get the most consecutive guesses right.
+
+## How the bot works
+The bot uses the `selenium` library to automate the game. It used json files as a database to store the search popularity of the options. The bot then compares the search popularity of the options and selects **"Higher"** or **"Lower"** based on the comparison.
+
+### Opening a web browser
+The bot opens a web browser and navigates to the Higher Lower game website.
+
+```python filename="main.py" copy  {10,4-6}
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+path = r"adblock.crx"
+chrome_options.add_extension(path)
+
+driver = webdriver.Chrome(options=chrome_options)
+driver.get("https://www.higherlowergame.com/")
+driver.find_element(By.XPATH, '//*[@id="root"]/div/span/section/div[2]/div/button[1]').click()
+```
+It loads the adblock extension and the clicks the "Play" button to start the game.
+
+### Data Collection
+The bot collects the search popularity of the options and stores it in a json file. If the data already exists, it just ignores it.
+
+```python filename="main.py" copy  
+def add_to_json(new_data, filename="data.json"):
+ try:
+   with open(filename, "r") as file:
+     data = json.load(file)
+ except FileNotFoundError:
+   data = []
+
+ exists = any(item["name"] == new_data["name"] for item in data)
+
+ if not exists:
+   data.append(new_data)
+
+   with open(filename, "w") as file:
+     json.dump(data, file, indent=4) 
+ else:
+   # Indicate that the name already exists
+   print(f"Name '{new_data['name']}' already exists in {filename}. Data not added.")
+```
+
+### Game Automation
+The bot automates the game by comparing the search popularity of the options and selecting **"Higher"** or **"Lower"** based on the comparison. If the search popularity is not found, it randomly guesses between **"Higher"** and **"Lower"**.
+
+<Callout >
+  Press `Ctrl + C` to stop the bot at any time.
+</Callout>
+
+```python filename="main.py" copy
+if get_value(searchTerm) == None:
+    print(f"search term not found {searchTerm}")
+    # randomly guess between high and low
+    guess = random.choice(['//*[@id="root"]/div/span/span/div/div[2]/div[2]/button[1]', '//*[@id="root"]/div/span/span/div/div[2]/div[2]/button[2]'])
+    driver.find_element(By.XPATH, guess).click()
+    time.sleep(2)
+    try:
+        playAgain = driver.find_element(By.XPATH, '//*[@id="game-over-btn"]').click()
+    except:
+        pass
+else:
+    if int(leftAmount) < int(get_value(searchTerm)):
+        print(f"guessing high")
+        driver.find_element(By.XPATH, '//*[@id="root"]/div/span/span/div/div[2]/div[2]/button[1]').click()
+    else:
+        print(f"guessing low")
+        driver.find_element(By.XPATH, '//*[@id="root"]/div/span/span/div/div[2]/div[2]/button[2]').click()
+    time.sleep(2)
+```
+## Conclusion
+After running the program for 2 hours stright, the json file contained around 1500 search terms. The bot was able to reach a highscore of 1000 and was able to play without any human intervention.
