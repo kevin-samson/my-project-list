@@ -1,18 +1,18 @@
 import Image from "next/image";
 
 # BeReel - A timelapse maker for BeReal
-A Flask-based webtool that gives you a customized timelapse of your favourite BeReal memories.
+A Flask-based webtool that gives you a customized timelapse of your favorite BeReal memories.
 
 View the code on [GitHub](https://github.com/kevin-samson/BITS-Calendar-Maker)
 
 <Image src="/images/BeReal.png" alt="BeReal" width={1000} height={1000}/>
 
-## Backgroud
-By the end of 2022, BeReal combined all the photos taken in a year and made a timelape. However, for some reason the timelapce was stopped in 2023.
-Searching across the internet, I came accross this project made by [theOneAndOnlyOne](https://github.com/theOneAndOnlyOne). It did not give the output I wanted, so I decided to decided to folk the project and make my own version of it.
+## Background
+By the end of 2022, BeReal combined all the photos taken in a year and made a timelapse. However, for some reason the timelapse was stopped in 2023.
+Searching across the internet, I came across this project made by [theOneAndOnlyOne](https://github.com/theOneAndOnlyOne). It did not give the output I wanted, so I decided to decided to folk the project and make my own version of it.
 
 ## Generating the 1st two seconds
-The first two second is all the photos taken put into 2 second. This is done by using the `opencv` and `moviepy` library. Also, a text is overlayed on top of the image.
+The first two second is all the photos taken put into 2 second. This is done by using the `opencv` and `moviepy` library. Also, a text is overladed on top of the image.
 
 ### Appending images together
 ```py filename="recap.py" copy
