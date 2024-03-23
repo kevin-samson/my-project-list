@@ -59,10 +59,7 @@ const config: DocsThemeConfig = {
           <a href="https://github.com/kevin-samson" target="_blank">
             GitHub
           </a>
-          <a
-            href="https://portfolio-kevin-samson.vercel.app/assets/KevinSamsonResume-1fdfbab2.pdf"
-            target="_blank"
-          >
+          <a href="/kevin-samson-cv.pdf" target="_blank">
             CV
           </a>
         </div>
