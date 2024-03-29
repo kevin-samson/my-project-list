@@ -3,7 +3,8 @@
         "title": "Projects",
         "theme": {
             "typesetting": "article",
-            "breadcrumb": false
+            "breadcrumb": false,
+            "toc": false
           }
     },
     "BITS": "BITS Calendar Maker", 

@@ -1,36 +1,67 @@
 import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
+import { useRouter } from "next/router";
+import { useConfig } from "nextra-theme-docs";
 
 const YEAR = new Date().getFullYear();
 const config: DocsThemeConfig = {
   logo: <span>Kevin Samson</span>,
-  head: (
-    <>
-      <meta property="og:title" content="Kevin's Project List" />
-      <meta
-        property="og:description"
-        content="A website that shows all the projects that I have built and also some info about me :)"
-      />
-      <meta
-        property="og:image"
-        content="https://kevin-samson.github.io/og-image.png"
-      />
-      <meta property="og:url" content="https://kevin-samson.github.io" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@Kevin_Samson_" />
-      <meta name="twitter:creator" content="@Kevin_Samson_" />
-      <meta name="twitter:title" content="Kevin's Project List" />
-      <meta
-        name="twitter:description"
-        content="A website that shows all the projects that I have built and also some info about me :)"
-      />
-    </>
-  ),
+  useNextSeoProps() {
+    const { asPath } = useRouter();
+    if (asPath !== "/") {
+      return {
+        titleTemplate: "%s - Kevin's Projects",
+      };
+    }
+  },
+  head: function useHead() {
+    const { title } = useConfig();
+    const { route } = useRouter();
+    const socialCard =
+      route === "/" || !title
+        ? "https://projects-by-kevin.vercel.app/api/og"
+        : `https://projects-by-kevin.vercel.app/api/og?title=${title}`;
+
+    return (
+      <>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <meta httpEquiv="Content-Language" content="en"></meta>
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta name="twitter:image" content={socialCard} />
+        <meta name="og:image" content={socialCard} />
+        <meta
+          name="twitter:site:domain"
+          content="projects-by-kevin.vercel.app"
+        ></meta>
+        <meta
+          name="twitter:url"
+          content="https://projects-by-kevin.vercel.app/"
+        ></meta>
+        <meta
+          name="og:title"
+          content={title ? title + " - Kevin's Projects" : "Kevin's Projects"}
+        />
+        <meta name="title" content="Projects By Kevin"></meta>
+        <meta
+          name="description"
+          content="A website showcasing and demonstrating the thought process behind the projects I've worked on"
+        ></meta>
+        <meta
+          name="og:description"
+          content="A website showcasing and demonstrating the thought process behind the projects I've worked on"
+        ></meta>
+      </>
+    );
+  },
   editLink: {
-    component: () => null,
+    text: "Edit this page on GitHub →",
   },
   feedback: {
-    content: () => null,
+    content: "Question? Give me feedback →",
+    labels: "feedback",
   },
   search: {
     placeholder: "Search",
@@ -72,6 +103,8 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/kevin-samson",
   },
+  docsRepositoryBase:
+    "https://github.com/kevin-samson/my-project-list/tree/main",
 };
 
 export default config;
