@@ -2,6 +2,7 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
+import { Analytics } from "@vercel/analytics/react";
 
 const YEAR = new Date().getFullYear();
 const config: DocsThemeConfig = {
@@ -75,6 +76,7 @@ const config: DocsThemeConfig = {
           width: "100%",
         }}
       >
+        <Analytics />
         <div>
           <time>{YEAR}</time> © Kevin Samson.
         </div>
