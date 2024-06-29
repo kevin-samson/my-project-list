@@ -1,0 +1,71 @@
+import Image from 'next/image'
+
+# Certificate verification using Blockchain technology 
+
+View the code on [GitHub](https://github.com/kevin-samson/certificate-verification-using-blockchain)
+
+Read our full paper  [here](/blockchain.pdf)
+
+<Image className='bg-white' src="/images/blockchain.png" width={1000} height={1000} />
+
+
+## Introduction
+As we move towards a more digital world, the need for secure and tamper-proof certificates is increasing. The traditional way of issuing certificates is prone to fraud and tampering. The certificates can be easily forged, leading to people using fake certificates to get jobs or admissions.
+
+Me and my team have developed a system that uses blockchain technology to issue and verify certificates. Our objective is to create an application that can run on any platform and only requires a camera and an internet connection to verify certificates. The student or the person who wants to apply for the job can provide the certificate in both the physical copy as well as the hard copy. Even if there is no camera available, the certificate can still be verified by using the softcopy of it. 
+
+
+## Generating certificates
+The certificates are generated using the `certificate_generator.py` script. This script reads an CSV file and generates a certificate using the template.png file as the base. The script uses the `Pillow` library to add text to the certificate.
+
+The hash of the certificate is calculated and digitally signed using the private key of the issuer. A QR code is generated using the hash of the certificate and pasted on the certificate.
+
+## The Smart Contract
+The smart contract is written in Solidity, a language that is used to write smart contracts on the Ethereum blockchain. The smart contract is used to store the hash of the certificate and the digital signature of the certificate.
+
+### Adding a Document
+The `addDocument` function is used to add a document to the blockchain. The function takes two parameters, the hash of the document and the digital signature of the document. The function checks if the document already exists in the blockchain and if the signature is valid. If the document does not exist and the signature is valid, the document is added to the blockchain.
+```solidity copy filename="contract.sol"
+function addDocument(bytes32 _hash, bytes memory _signature) public {
+       require(_hash.length > 0, "Hash is required");
+       require(_signature.length > 0, "Signature is required");
+       require(documents[_hash].timestamp == 0, "Document already exists");
+       require(validate(_hash, _signature), "Invalid signature");
+       documents[_hash] = Document(_hash, _signature, true, block.timestamp);
+```
+
+### Checking if a Document Exists
+The `documentExists` function is used to check if a document exists in the blockchain. The function takes the hash of the document as a parameter and returns a boolean value indicating whether the document exists in the blockchain.
+```solidity copy filename="contract.sol"
+    function documentExists(bytes32 _hash) public view returns (bool) {
+        require(_hash.length > 0, "Hash is required");
+
+        return documents[_hash].timestamp > 0;
+    }
+```
+
+### Changing the Status of a Document
+The `changeDocumentStatus` function is used to change the status of a document in the blockchain. The function takes the hash of the document and a boolean value as parameters. The function checks if the document exists in the blockchain and if the sender is authorized to change the status of the document. If the document exists and the sender is authorized, the status of the document is changed.
+```solidity copy filename="contract.sol"
+    function changeDocumentStatus(bytes32 _hash, bool _valid) public {
+        require(_hash.length > 0, "Hash is required");
+        require(documents[_hash].timestamp > 0, "Document not found");
+        require(
+            msg.sender == address(0xbc56bb97DCAe27474b4bBDc2186D671BBbEC0d32),
+            "Unauthorized"
+        );
+        documents[_hash].valid = _valid;
+    }
+```
+
+## Deploying the Smart Contract
+Ones the smart contract is compiled, it can be deployed on the Ethereum blockchain. This returns the address and the ABI of the smart contract. The address is used to interact with the smart contract and the ABI is used to call the functions of the smart contract.
+
+Now the hash and the digital signature of the certificate can be added to the blockchain using the `addDocument` function. The status of the document can be changed using the `changeDocumentStatus` function. Also the document can be verified using the `documentExists` function.
+
+## Advantages of this approach
+- The certificates are stored on the blockchain, which makes them tamper-proof.
+- The certificates can be verified by anyone using the hash of the certificate.
+- The certificates can be verified even if the issuer is not available.
+- The certificates can be verified using a camera and an internet connection.
+- The certificates can be verified using the softcopy of the certificate.
