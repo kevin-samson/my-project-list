@@ -2,6 +2,7 @@ import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   // Define your metadata here
@@ -60,6 +61,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
+          feedback={{ content: "Question? Give me feedback" }}
           navbar={navbar}
           search={<Search placeholder="Search" />}
           pageMap={await getPageMap()}
@@ -68,6 +70,7 @@ export default async function RootLayout({ children }) {
           // ... Your additional layout options
         >
           {children}
+          <Analytics />
         </Layout>
       </body>
     </html>
