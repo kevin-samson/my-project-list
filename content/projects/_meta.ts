@@ -12,7 +12,8 @@ const meta: MetaRecord = {
     "BITS": "BITS Calendar Maker", 
     "BeReel": "BeReel",
     "higherlowerBot": "Higher-Lower Bot",
-    "blockchain": "Certificate verification using Blockchain"
+    "blockchain": "Certificate verification using Blockchain",
+    "tts" : "Text to Speech",
 }
  
 export default meta
