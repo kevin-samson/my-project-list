@@ -1,12 +1,26 @@
+import Image from 'next/image';
+
 # Text-to-Speech App
 
 This is a simple **Text-to-Speech** application that runs locally and supports dark mode.
 
+View the code on [GitHub](https://github.com/kevin-samson/text-to-speech)
+
+Visit the live demo [here](https://text-to-speech-mauve-ten.vercel.app)
+
+<Image src="/images/tts.png" alt="Text to Speech" width={1000} height={1000} />
+
+## Motivation
+For my multimedia project, I was tasked with developing a text-to-speech application. However, there was a restriction: I couldn’t use any external APIs, such as Google Text-to-Speech.
+
+To overcome this limitation, I opted to use the native browser APIs. These APIs not only offer speed but also come free of charge. Specifically, I utilized the Web Speech API to convert text into speech. 
 ## Features
 
 - Convert text into speech
 - Dark mode support
 - Simple and easy to use
+- Works by using native browser APIs
+- Support pitch and rate adjustment
 
 ## How to Run
 
@@ -20,13 +34,13 @@ This is a simple **Text-to-Speech** application that runs locally and supports d
 2. **Install Dependencies**
 
    ```sh
-   npm prune --legacy-peer-deps
+   pnpm install
    ```
 
 3. **Start the Application**
 
    ```sh
-   npm run dev
+   pnpm run dev
    ```
 
 4. Open your browser and go to **`http://localhost:3000`**.
@@ -34,6 +48,5 @@ This is a simple **Text-to-Speech** application that runs locally and supports d
 ## Requirements
 
 - **Node.js** (latest LTS recommended)
-- **npm** or **yarn**
+- **pnpm** or **yarn**
 
-Enjoy using the Text-to-Speech App! 🎤🔊
