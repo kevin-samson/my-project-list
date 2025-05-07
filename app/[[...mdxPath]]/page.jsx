@@ -6,7 +6,7 @@ export const generateStaticParams = generateStaticParamsFor('mdxPath')
 export async function generateMetadata(props) {
     const { mdxPath } = await props.params
     const { metadata } = await importPage(mdxPath)
-    const title = metadata.title || 'Kevin Samson';
+    const title = metadata.title || 'Projects by Kevin';
     const ogImage = `/api/og?title=${title}`;
     return {
         metadataBase: new URL('https://projects-by-kevin.vercel.app'),
