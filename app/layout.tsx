@@ -4,10 +4,44 @@ import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
 
-export const metadata = {
-  // Define your metadata here
-  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
-};
+export function generateMetadata({ params, searchParams }, parent) {
+  const title = searchParams?.title;
+  const ogImage = title ? `/api/og?title=${title}` : '/api/og';
+
+  return {
+    metadataBase: new URL('https://projects-by-kevin.vercel.app'),
+    title: {
+      template: '%s - Kevin\'s Projects',
+      default: 'Kevin\'s Projects'
+    },
+    description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
+    viewport: 'width=device-width, initial-scale=1.0',
+    openGraph: {
+      title: {
+        template: '%s - Kevin\'s Projects',
+        default: 'Kevin\'s Projects'
+      },
+      description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
+      url: 'https://projects-by-kevin.vercel.app/',
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: 'Kevin\'s Projects'
+      }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: {
+        template: '%s - Kevin\'s Projects',
+        default: 'Kevin\'s Projects'
+      },
+      description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
+      site: 'projects-by-kevin.vercel.app',
+      images: [ogImage]
+    }
+  };
+}
 
 const navbar = (
   <Navbar
