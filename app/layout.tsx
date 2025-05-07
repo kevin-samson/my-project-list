@@ -3,10 +3,12 @@ import { Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
+import { useThemeConfig } from 'nextra-theme-docs'
 
 export function generateMetadata({ params, searchParams }, parent) {
-  const title = searchParams?.title;
-  const ogImage = title ? `/api/og?title=${title}` : '/api/og';
+  const { toc } = useThemeConfig();
+  const title = searchParams?.title || toc?.title || 'Kevin Samson';
+  const ogImage = `/api/og?title=${title}`;
 
   return {
     metadataBase: new URL('https://projects-by-kevin.vercel.app'),
