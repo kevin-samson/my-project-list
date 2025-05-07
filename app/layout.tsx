@@ -3,6 +3,7 @@ import { Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
+// import { useThemeConfig } from 'nextra-theme-docs'
 
 /* export function generateMetadata({ params, searchParams }, parent) {
   const title = searchParams?.title;
