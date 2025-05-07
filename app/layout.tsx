@@ -4,9 +4,9 @@ import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
 
-export function generateMetadata({ params, searchParams }, parent) {
+/* export function generateMetadata({ params, searchParams }, parent) {
   const title = searchParams?.title;
-  const ogImage = title ? `/api/og?title=${title}` : '/api/og';
+  const ogImage = title ? `/api/og?title=${title}` : '/api/og?title=Kevin Samson';
 
   return {
     metadataBase: new URL('https://projects-by-kevin.vercel.app'),
@@ -41,7 +41,7 @@ export function generateMetadata({ params, searchParams }, parent) {
       images: [ogImage]
     }
   };
-}
+} */
 
 const navbar = (
   <Navbar
