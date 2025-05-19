@@ -1,0 +1,66 @@
+# Predictive Analysis of Vehicle Fuel Consumption using Neural Networks
+
+View the code on [GitHub](https://github.com/kevin-samson/Predictive-Analysis-of-Vehicle-Fuel-Consumption)
+
+Read our full paper  [here](/Vehicle-Fuel-Consumption.pdf)
+
+## Introduction
+Fuel consumption in vehicles plays a major role in
+influencing both economic costs and environmental impact
+throughout. Due to rising fuel demand, the prediction of
+vehicle fuel consumption has become a major focus in the
+modern automotive industry. Predicting the fuel consumption
+provides us with an upper hand in understanding how to
+manage our fuel by considering critical factors like engine
+capacity, consumption, weight etc. 
+
+## Dataset
+The dataset used in this project is the [Fuel Consumption Dataset](https://www.kaggle.com/datasets/ahmettyilmazz/fuel-consumption) from Kaggle. The dataset contains information about various vehicles, including their fuel consumption, engine size, and other features
+
+## Model
+The proposed model employs a multilayer perceptron
+(MLP) architecture with decreasing neuron counts across
+layers, forming a pyramidal structure. This design facilitates
+the progressive extraction of higher-level features relevant to
+emissions prediction.
+The neural network consists of:
+1. Input Layer: A dense layer with 128 neurons and
+ReLU activation, accepting the preprocessed feature
+vector
+2. First Hidden Layer: 64 neurons with ReLU
+activation
+3. Second Hidden Layer: 32 neurons with ReLU
+activation
+4. Output Layer: Single neuron for continuous
+emissions prediction (regression)
+
+```python copy filename="model.py"
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.callbacks import EarlyStopping
+
+
+# Build model
+model = Sequential([
+    Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
+    Dense(64, activation='relu'),
+    Dense(32, activation='relu'),
+    Dense(1)  # Output layer for regression
+])
+
+# Compile model
+model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])
+
+# Train model with early stopping
+early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+
+history = model.fit(
+    X_train, y_train,
+    validation_split=0.2,
+    epochs=100,
+    batch_size=32,
+    callbacks=[early_stop],
+)
+```
+
+

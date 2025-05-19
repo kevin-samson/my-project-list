@@ -14,6 +14,7 @@ const meta: MetaRecord = {
     "higherlowerBot": "Higher-Lower Bot",
     "blockchain": "Certificate verification using Blockchain",
     "tts" : "Text to Speech",
+    "fuel-consumption" : "Predictive Analysis of Vehicle Fuel Consumption",
 }
  
 export default meta

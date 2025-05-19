@@ -3,6 +3,11 @@ import { useMDXComponents as getMDXComponents } from '../../mdx-components'
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1.0
+}
+
 export async function generateMetadata(props) {
     const { mdxPath } = await props.params
     const { metadata } = await importPage(mdxPath)
@@ -15,7 +20,6 @@ export async function generateMetadata(props) {
           default: 'Kevin\'s Projects'
         },
         description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
-        viewport: 'width=device-width, initial-scale=1.0',
         openGraph: {
           title: {
             template: '%s - Kevin\'s Projects',
