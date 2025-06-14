@@ -68,6 +68,10 @@ export default async function RootLayout({ children }) {
             }),
           }}
         />
+        <meta
+          name="google-site-verification"
+          content="PcWYPPsoKmegLoFwFDKcBkWPASJ7RHuDu6gizLEpIhc"
+        />
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
