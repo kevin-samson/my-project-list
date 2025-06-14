@@ -1,7 +1,21 @@
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { useMDXComponents as getMDXComponents } from '../../mdx-components'
 
-export const generateStaticParams = generateStaticParamsFor('mdxPath')
+import glob from 'fast-glob'
+
+export async function generateStaticParams() {
+  const files = await glob('pages/**/*.mdx')
+
+  return files
+    .filter((f) => !f.includes('icon') && !f.includes('.png') && !f.includes('.svg'))
+    .map((f) => {
+      const path = f
+        .replace(/^pages\//, '')
+        .replace(/\.mdx$/, '')
+        .split('/')
+      return { mdxPath: path }
+    })
+}
 
 export const viewport = {
   width: 'device-width',
@@ -11,19 +25,19 @@ export const viewport = {
 export async function generateMetadata(props) {
     const { mdxPath } = await props.params
     const { metadata } = await importPage(mdxPath)
-    const title = metadata.title || 'Projects by Kevin';
+    const title = metadata.title || 'Projects by Kevin Samson';
     const ogImage = `/api/og?title=${title}`;
     return {
         metadataBase: new URL('https://projects-by-kevin.vercel.app'),
         title: {
-          template: '%s - Kevin\'s Projects',
-          default: 'Kevin\'s Projects'
+          template: '%s - Kevin Samson\'s Projects',
+          default: 'Kevin Samson'
         },
         description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
         openGraph: {
           title: {
-            template: '%s - Kevin\'s Projects',
-            default: 'Kevin\'s Projects'
+            template: '%s - Kevin Samson\'s Projects',
+            default: 'Kevin Samson'
           },
           description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
           url: 'https://projects-by-kevin.vercel.app/',
@@ -31,7 +45,7 @@ export async function generateMetadata(props) {
             url: ogImage,
             width: 1200,
             height: 630,
-            alt: 'Kevin\'s Projects'
+            alt: 'Kevin Samson\'s Projects'
           }]
         },
         twitter: {
@@ -43,7 +57,15 @@ export async function generateMetadata(props) {
           description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
           site: 'projects-by-kevin.vercel.app',
           images: [ogImage]
-        }
+        },
+        robots: {
+          index: true,
+          follow: true
+        },
+        alternates: {
+          canonical: `https://projects-by-kevin.vercel.app/${mdxPath?.join('/') || ''}`
+        },
+        keywords: ['Kevin Samson', 'portfolio', 'software projects', 'developer', 'engineering showcase']
       };
 }
 

@@ -52,6 +52,22 @@ export default async function RootLayout({ children }) {
       // ... Your additional head options
       >
         <link rel="shortcut icon" href="/images/general/icon.svg" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Kevin Samson",
+              url: "https://projects-by-kevin.vercel.app",
+              sameAs: [
+                "https://github.com/kevin-samson",
+                "https://www.linkedin.com/in/kevin-samson--/",
+              ],
+              jobTitle: "Software Developer",
+            }),
+          }}
+        />
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
