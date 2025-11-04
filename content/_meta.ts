@@ -1,18 +1,30 @@
 import type { MetaRecord } from 'nextra'
  
 const meta: MetaRecord = {
-  "index" : {
-    "title": "About   ",
+  "index": {
     "type": "page",
-    "theme":{
-        "sidebar":false,
-        "toc":false
+    "display": "hidden",
+    "theme": {
+      typesetting: "article",
+      layout: "full",
+      toc: false,
+      timestamp: false,
+      sidebar: false,
+      pagination: false
+    }
+
+  },
+  "about": {
+    "title": "About",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
     }
   },
   "projects": {
     "title": "Projects",
-    "href": "google.com",
-    "type" : "page"
+    "type": "page"
   }
 }
  
