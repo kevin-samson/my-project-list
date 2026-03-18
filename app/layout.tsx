@@ -3,6 +3,7 @@ import { Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
+import "globals.css";
 
 const navbar = (
   <Navbar
