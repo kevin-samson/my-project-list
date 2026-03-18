@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,10 +22,14 @@ const item = {
 export default function Home() {
   return (
     <div className="min-h-[80vh] bg-linear-to-br from-background via-background to-primary/5 animate-gradient">
-      {/* Hero Section */}
-      <main className="max-w-5xl mx-auto px-6  pb-20 flex flex-col items-center justify-center min-h-screen">
-        <div className="space-y-6 text-center max-w-3xl">
-          <div className="space-y-2">
+      <main className="max-w-5xl mx-auto px-6 pb-20 flex flex-col items-center justify-center min-h-screen">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="space-y-6 text-center max-w-3xl"
+        >
+          <motion.div variants={item} className="space-y-2">
             <p className="text-muted-foreground text-lg font-light">Welcome</p>
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               I&apos;m{" "}
@@ -32,24 +37,81 @@ export default function Home() {
                 Kevin Samson
               </span>
             </h1>
-          </div>
+          </motion.div>
 
-          <p className="text-2xl md:text-3xl font-light text-muted-foreground leading-relaxed">
+          <motion.p
+            variants={item}
+            className="text-2xl md:text-3xl font-light text-muted-foreground leading-relaxed"
+          >
             Full-stack developer specializing in AI-driven automation and
             blockchain technology
-          </p>
+          </motion.p>
 
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <motion.p
+            variants={item}
+            className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
+          >
             I build innovative systems including AI-powered financial analyzers
             and blockchain-based verification platforms. Proficient in Python,
             C#, and modern web frameworks.
-          </p>
+          </motion.p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8"></div>
+          <motion.div
+            variants={item}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left"
+          >
+            {[
+              {
+                label: "Full-Stack",
+                techs: ["React", "Next.js", "ASP.NET", "Flask", "FastAPI"],
+              },
+              {
+                label: "AI",
+                techs: ["Python", "GMFT", "Claude API", "Claude Agents"],
+              },
+              {
+                label: "Blockchain & Web3",
+                techs: ["Solidity", "Ethereum", "Solana", "Anchor"],
+              },
+            ].map(({ label, techs }) => (
+              <div
+                key={label}
+                className="rounded-lg border border-border/50 bg-muted/30 p-4 space-y-2"
+              >
+                <p className="text-sm font-semibold">{label}</p>
+                <div className="flex flex-wrap gap-1">
+                  {techs.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs px-2 py-0.5 rounded-full bg-background border border-border/50 text-muted-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </motion.div>
 
-          {/* Contact Links */}
-          <div className="pt-12 border-t border-border/50">
+          <motion.div
+            variants={item}
+            className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
+          >
+            <Link
+              href="/projects"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+            >
+              View Projects
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border hover:bg-muted transition-colors font-medium"
+            >
+              About Me
+            </Link>
+          </motion.div>
+
+          <motion.div variants={item} className="pt-12 border-t border-border/50">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
               <a
                 href="tel:+971567269454"
@@ -83,8 +145,8 @@ export default function Home() {
                 LinkedIn
               </a>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </main>
     </div>
   );

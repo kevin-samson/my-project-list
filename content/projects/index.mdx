@@ -1,46 +1,50 @@
+import Image from 'next/image'
 import { Cards } from 'nextra/components'
 
 # My list of projects
 
-Here are of the projects I've worked on:
- 
-{/* <Cards>
-  <Card image arrow title="BITS Calendar Maker" href="/projects/BITS">
-    <>![Bits Calendar Maker](/images/bits.png)</>
-  </Card>
-  <Card image arrow title="BeReel" href="/projects/BeReel" >
-  <>![BeReel](/images/BeReal.png)</>
-  </Card>
-  <Card image arrow title="Higher-Lower bot" href='/projects/higherlowerBot'>
-  <>![Higher-Lower](/images/highlow.png)</>
-  </Card>
-  <Card image arrow title="Certificate verification using Blockchain" href='/projects/blockchain'>
-  <>![Higher-Lower](/images/blockchain.png)</>
-  </Card>
-</Cards> */}
+Here are the projects I've worked on:
 
 <Cards>
+  <Cards.Card arrow title="Bank Statement Reader" href='/projects/bank-statement-reader'>
+    <div style={{height: '200px', background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2027 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <span style={{fontSize: '4rem'}}>📊</span>
+    </div>
+  </Cards.Card>
+
   <Cards.Card arrow title="Predictive Analysis of Vehicle Fuel Consumption" href='/projects/fuel-consumption'>
-    <><>![Higher-Lower](/images/fuel-consumption.png)</></>
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/fuel-consumption.png" alt="Predictive Analysis of Vehicle Fuel Consumption" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
   </Cards.Card>
 
-  <Cards.Card image="/images/blockchain.png" arrow title="Certificate verification using Blockchain" href='/projects/blockchain'>
-    <>![Higher-Lower](/images/blockchain.png)</>
+  <Cards.Card arrow title="Certificate verification using Blockchain" href='/projects/blockchain'>
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/blockchain.png" alt="Certificate verification using Blockchain" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
   </Cards.Card>
 
-  <Cards.Card image="/images/bits.png" arrow title="BITS Calendar Maker" href="/projects/BITS">
-      <>![Bits Calendar Maker](/images/bits.png)</>
-  </Cards.Card>
-    
-  <Cards.Card image="/images/BeReal.png" arrow title="BeReel" href="/projects/BeReel" >
-  <>![BeReel](/images/BeReal.png)</>
-  </Cards.Card>
-  <Cards.Card image="/images/highlow.png" arrow title="Higher-Lower bot" href='/projects/higherlowerBot'>
-  <>![Higher-Lower](/images/highlow.png)</>
+  <Cards.Card arrow title="BITS Calendar Maker" href="/projects/BITS">
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/bits.png" alt="BITS Calendar Maker" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
   </Cards.Card>
 
-  <Cards.Card image="/images/tts.png" arrow title="Text to Speech" href='/projects/tts'>
-  <>![Higher-Lower](/images/tts.png)</>
+  <Cards.Card arrow title="BeReel" href="/projects/BeReel">
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/BeReal.png" alt="BeReel" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
   </Cards.Card>
 
+  <Cards.Card arrow title="Higher-Lower Bot" href='/projects/higherlowerBot'>
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/highlow.png" alt="Higher-Lower Bot" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
+  </Cards.Card>
+
+  <Cards.Card arrow title="Text to Speech" href='/projects/tts'>
+    <div style={{height: '200px', overflow: 'hidden'}}>
+      <Image src="/images/tts.png" alt="Text to Speech" width={600} height={200} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
+  </Cards.Card>
 </Cards>

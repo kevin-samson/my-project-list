@@ -52,7 +52,7 @@ export default async function RootLayout({ children }) {
       <Head
       // ... Your additional head options
       >
-        <link rel="shortcut icon" href="/images/general/icon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -77,13 +77,10 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
-          feedback={{ content: "Question? Give me feedback" }}
           navbar={navbar}
           search={<Search placeholder="Search" />}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/kevin-samson/my-project-list/tree/main"
           footer={footer}
-          // ... Your additional layout options
         >
           {children}
           <Analytics />

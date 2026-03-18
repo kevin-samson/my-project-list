@@ -1,0 +1,49 @@
+---
+title: Bank Statement Reader
+---
+
+# Bank Statement Reader
+
+A Streamlit-based application for processing encrypted and non-encrypted bank statement PDFs, extracting financial data, and applying machine learning-based transaction categorization.
+
+## Features
+
+- **PDF Processing** — Handle both encrypted and non-encrypted bank statement PDFs
+- **Table Extraction** — Automatically detect and extract tables from PDF documents using GMFT
+- **Column Mapping** — Interactive UI for mapping extracted PDF columns to standard financial fields (Date, Description, Debit, Credit, Balance)
+- **Data Cleaning** — Automatic deduplication and date-sorted output
+- **ML Categorization** — SetFit-based transaction categorization (research phase)
+- **Export** — Download processed data as CSV
+
+## How It Works
+
+### PDF Processing
+
+Uploaded files are saved to temporary files, decrypted if password-protected via PyPDF2, then passed through `gmft.AutoTableDetector` to identify and extract tables as pandas DataFrames. Temporary files are cleaned up automatically after processing.
+
+### Data Processing
+
+User-defined column mappings are applied to standardize fields, DataFrames are combined, duplicates removed, and rows sorted by date.
+
+### ML Categorization
+
+The `research/` folder contains experimental SetFit model training (`train.py`) for automatically classifying transactions into spending categories based on their description.
+
+## Tech Stack
+
+**Python** · Streamlit · GMFT · PyPDF2 · pandas · SetFit · sentence-transformers
+
+## Usage
+
+```bash
+# Install dependencies
+pip install streamlit pandas PyPDF2 gmft setfit sentence-transformers datasets python-dotenv
+
+# Run the app
+streamlit run app.py
+```
+
+1. Upload one or more bank statement PDFs
+2. Enter passwords for any encrypted files
+3. Map the extracted columns to standard financial fields
+4. Review the cleaned data and export as CSV

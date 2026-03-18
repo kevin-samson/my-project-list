@@ -9,6 +9,7 @@ const meta: MetaRecord = {
             "toc": false
           },
     },
+    "bank-statement-reader": "Bank Statement Reader",
     "fuel-consumption" : "Predictive Analysis of Vehicle Fuel Consumption",
     "blockchain": "Certificate verification using Blockchain",
     "BITS": "BITS Calendar Maker", 
