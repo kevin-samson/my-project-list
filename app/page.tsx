@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 
-const fade = {
+const fade: Variants = {
   hidden: { opacity: 0 },
   show: (i: number) => ({
     opacity: 1,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
+    transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -31,7 +31,7 @@ export default function Home() {
         variants={fade}
         initial="hidden"
         animate="show"
-        className="text-sm text-[var(--nextra-colors-gray-500,#6b7280)] mb-6 tracking-wide uppercase"
+        className="text-sm text-(--nextra-colors-gray-500,#6b7280) mb-6 tracking-wide uppercase"
       >
         Kevin Samson
       </motion.p>
@@ -53,7 +53,7 @@ export default function Home() {
         variants={fade}
         initial="hidden"
         animate="show"
-        className="text-base leading-relaxed text-[var(--nextra-colors-gray-500,#6b7280)] mb-10 max-w-xl"
+        className="text-base leading-relaxed text-(--nextra-colors-gray-500,#6b7280) mb-10 max-w-xl"
       >
         I build AI-driven automation systems and blockchain verification
         platforms. Proficient in Python, C#, and modern web frameworks —
@@ -70,7 +70,7 @@ export default function Home() {
         {SKILLS.map((skill) => (
           <span
             key={skill}
-            className="text-xs px-2.5 py-1 rounded border border-[var(--nextra-colors-gray-200,#e5e7eb)] text-[var(--nextra-colors-gray-500,#6b7280)]"
+            className="text-xs px-2.5 py-1 rounded border border-(--nextra-colors-gray-200,#e5e7eb) text-(--nextra-colors-gray-500,#6b7280)"
           >
             {skill}
           </span>
@@ -103,7 +103,7 @@ export default function Home() {
         variants={fade}
         initial="hidden"
         animate="show"
-        className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--nextra-colors-gray-500,#6b7280)] border-t border-[var(--nextra-colors-gray-200,#e5e7eb)] pt-8"
+        className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-(--nextra-colors-gray-500,#6b7280) border-t border-(--nextra-colors-gray-200,#e5e7eb) pt-8"
       >
         <a
           href="mailto:k3vinsamson@gmail.com"

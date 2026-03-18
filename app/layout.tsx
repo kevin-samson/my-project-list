@@ -81,6 +81,8 @@ export default async function RootLayout({ children }) {
           search={<Search placeholder="Search" />}
           pageMap={await getPageMap()}
           footer={footer}
+        editLink={null}
+        feedback={{ content: null }}
         >
           {children}
           <Analytics />
