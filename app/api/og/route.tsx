@@ -5,22 +5,10 @@ export const config = {
   runtime: "edge",
 };
 
-// Construct the absolute URL for the font file
-const fontURL = new URL(
-  "/fonts/Inter-SemiBold.otf",
-  process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000" // Fallback for local testing
-).href;
-
-// Load font and SVG data
-const interSemiBold = fetch(fontURL).then((res) => res.arrayBuffer());
-
 export async function GET(req: Request): Promise<Response> {
   try {
-    const inter = await interSemiBold;
-
-    const { searchParams } = new URL(req.url);
+    const { origin, searchParams } = new URL(req.url);
+    const inter = await fetch(`${origin}/fonts/Inter-SemiBold.otf`).then((res) => res.arrayBuffer());
 
     // ?title=<title>
     const hasTitle = searchParams.has("title");
