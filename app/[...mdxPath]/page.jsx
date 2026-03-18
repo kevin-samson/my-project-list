@@ -4,13 +4,13 @@ import { useMDXComponents as getMDXComponents } from '../../mdx-components'
 import glob from 'fast-glob'
 
 export async function generateStaticParams() {
-  const files = await glob('pages/**/*.mdx')
+  const files = await glob('content/**/*.mdx')
 
   return files
     .filter((f) => !f.includes('icon') && !f.includes('.png') && !f.includes('.svg'))
     .map((f) => {
       const path = f
-        .replace(/^pages\//, '')
+        .replace(/^content\//, '')
         .replace(/\.mdx$/, '')
         .split('/')
       return { mdxPath: path }
@@ -26,36 +26,28 @@ export async function generateMetadata(props) {
     const { mdxPath } = await props.params
     const { metadata } = await importPage(mdxPath)
     const title = metadata.title || 'Projects by Kevin Samson';
-    const ogImage = `/api/og?title=${title}`;
+    const description = metadata.description || 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on';
+    const ogImage = `/api/og?title=${encodeURIComponent(title)}`;
     return {
         metadataBase: new URL('https://projects-by-kevin.vercel.app'),
-        title: {
-          template: '%s - Kevin Samson\'s Projects',
-          default: 'Kevin Samson'
-        },
-        description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
+        title,
+        description,
         openGraph: {
-          title: {
-            template: '%s - Kevin Samson\'s Projects',
-            default: 'Kevin Samson'
-          },
-          description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
-          url: 'https://projects-by-kevin.vercel.app/',
+          title,
+          description,
+          url: `https://projects-by-kevin.vercel.app/${mdxPath?.join('/') || ''}`,
           images: [{
             url: ogImage,
             width: 1200,
             height: 630,
-            alt: 'Kevin Samson\'s Projects'
+            alt: title
           }]
         },
         twitter: {
           card: 'summary_large_image',
-          title: {
-            template: '%s - Kevin\'s Projects',
-            default: 'Kevin\'s Projects'
-          },
-          description: 'A website showcasing and demonstrating the thought process behind the projects I\'ve worked on',
-          site: 'projects-by-kevin.vercel.app',
+          title,
+          description,
+          site: '@Kevin_Samson_',
           images: [ogImage]
         },
         robots: {
