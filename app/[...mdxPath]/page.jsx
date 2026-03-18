@@ -1,19 +1,28 @@
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { useMDXComponents as getMDXComponents } from '../../mdx-components'
+import fs from 'fs'
+import path from 'path'
 
-import glob from 'fast-glob'
+function getMdxFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) return getMdxFiles(full)
+    if (entry.isFile() && entry.name.endsWith('.mdx')) return [full]
+    return []
+  })
+}
 
 export async function generateStaticParams() {
-  const files = await glob('content/**/*.mdx')
+  const contentDir = path.join(process.cwd(), 'content')
+  const files = getMdxFiles(contentDir)
 
   return files
-    .filter((f) => !f.includes('icon') && !f.includes('.png') && !f.includes('.svg'))
+    .filter((f) => !f.endsWith('index.mdx'))
     .map((f) => {
-      const path = f
-        .replace(/^content\//, '')
+      const relative = f
+        .replace(contentDir + path.sep, '')
         .replace(/\.mdx$/, '')
-        .split('/')
-      return { mdxPath: path }
+      return { mdxPath: relative.split(path.sep) }
     })
 }
 
@@ -33,6 +42,8 @@ export async function generateMetadata(props) {
         title,
         description,
         openGraph: {
+          type: 'article',
+          siteName: "Kevin Samson's Projects",
           title,
           description,
           url: `https://projects-by-kevin.vercel.app/${mdxPath?.join('/') || ''}`,

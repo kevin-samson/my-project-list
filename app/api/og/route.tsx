@@ -16,7 +16,7 @@ const fontURL = new URL(
 // Load font and SVG data
 const interSemiBold = fetch(fontURL).then((res) => res.arrayBuffer());
 
-export async function GET(req) {
+export async function GET(req: Request): Promise<Response> {
   try {
     const inter = await interSemiBold;
 
@@ -116,7 +116,7 @@ export async function GET(req) {
           },
         ],
       }
-    );
+    ) as unknown as Response;
   } catch (e) {
     console.error("Error generating OG image:", e);
     return new Response("Failed to generate OG image", { status: 500 });

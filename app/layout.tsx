@@ -4,6 +4,26 @@ import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import { Analytics } from "@vercel/analytics/next";
 import "globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://projects-by-kevin.vercel.app"),
+  title: {
+    template: "%s — Kevin Samson",
+    default: "Kevin Samson — Full-stack Developer",
+  },
+  description:
+    "Full-stack developer specializing in AI-driven automation and blockchain technology. Based in Abu Dhabi, UAE.",
+  openGraph: {
+    type: "website",
+    siteName: "Kevin Samson's Projects",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@Kevin_Samson_",
+  },
+  robots: { index: true, follow: true },
+};
 
 const navbar = (
   <Navbar

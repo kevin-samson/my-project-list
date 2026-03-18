@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description:
     "Full-stack developer specializing in AI-driven automation and blockchain technology. Based in Abu Dhabi, UAE.",
   openGraph: {
+    type: "website",
+    siteName: "Kevin Samson's Projects",
     title: "Kevin Samson — Full-stack Developer",
     description:
       "Full-stack developer specializing in AI-driven automation and blockchain technology. Based in Abu Dhabi, UAE.",
