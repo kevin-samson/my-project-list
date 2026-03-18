@@ -4,150 +4,136 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const container = {
+const fade = {
   hidden: { opacity: 0 },
-  show: {
+  show: (i: number) => ({
     opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
+    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
+  }),
 };
 
-const item = {
-  hidden: { opacity: 0, y: 8 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+const SKILLS = [
+  "React",
+  "Next.js",
+  "ASP.NET",
+  "Python",
+  "Claude API",
+  "Solidity",
+  "Solana",
+  "Docker",
+];
 
 export default function Home() {
   return (
-    <div className="min-h-[80vh] bg-linear-to-br from-background via-background to-primary/5 animate-gradient">
-      <main className="max-w-5xl mx-auto px-6 pb-20 flex flex-col items-center justify-center min-h-screen">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="space-y-6 text-center max-w-3xl"
+    <main className="max-w-2xl mx-auto px-6 py-24 md:py-36">
+      <motion.p
+        custom={0}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="text-sm text-[var(--nextra-colors-gray-500,#6b7280)] mb-6 tracking-wide uppercase"
+      >
+        Kevin Samson
+      </motion.p>
+
+      <motion.h1
+        custom={1}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="text-4xl md:text-5xl font-semibold leading-tight tracking-tight mb-6"
+      >
+        Full-stack developer
+        <br />
+        specializing in AI &amp; blockchain.
+      </motion.h1>
+
+      <motion.p
+        custom={2}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="text-base leading-relaxed text-[var(--nextra-colors-gray-500,#6b7280)] mb-10 max-w-xl"
+      >
+        I build AI-driven automation systems and blockchain verification
+        platforms. Proficient in Python, C#, and modern web frameworks —
+        currently based in Abu Dhabi, UAE.
+      </motion.p>
+
+      <motion.div
+        custom={3}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap gap-1.5 mb-12"
+      >
+        {SKILLS.map((skill) => (
+          <span
+            key={skill}
+            className="text-xs px-2.5 py-1 rounded border border-[var(--nextra-colors-gray-200,#e5e7eb)] text-[var(--nextra-colors-gray-500,#6b7280)]"
+          >
+            {skill}
+          </span>
+        ))}
+      </motion.div>
+
+      <motion.div
+        custom={4}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap gap-6 text-sm mb-16"
+      >
+        <Link
+          href="/projects"
+          className="font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
         >
-          <motion.div variants={item} className="space-y-2">
-            <p className="text-muted-foreground text-lg font-light">Welcome</p>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              I&apos;m{" "}
-              <span className="bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
-                Kevin Samson
-              </span>
-            </h1>
-          </motion.div>
+          View Projects →
+        </Link>
+        <Link
+          href="/about"
+          className="font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
+        >
+          About Me →
+        </Link>
+      </motion.div>
 
-          <motion.p
-            variants={item}
-            className="text-2xl md:text-3xl font-light text-muted-foreground leading-relaxed"
-          >
-            Full-stack developer specializing in AI-driven automation and
-            blockchain technology
-          </motion.p>
-
-          <motion.p
-            variants={item}
-            className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
-          >
-            I build innovative systems including AI-powered financial analyzers
-            and blockchain-based verification platforms. Proficient in Python,
-            C#, and modern web frameworks.
-          </motion.p>
-
-          <motion.div
-            variants={item}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left"
-          >
-            {[
-              {
-                label: "Full-Stack",
-                techs: ["React", "Next.js", "ASP.NET", "Flask", "FastAPI"],
-              },
-              {
-                label: "AI",
-                techs: ["Python", "GMFT", "Claude API", "Claude Agents"],
-              },
-              {
-                label: "Blockchain & Web3",
-                techs: ["Solidity", "Ethereum", "Solana", "Anchor"],
-              },
-            ].map(({ label, techs }) => (
-              <div
-                key={label}
-                className="rounded-lg border border-border/50 bg-muted/30 p-4 space-y-2"
-              >
-                <p className="text-sm font-semibold">{label}</p>
-                <div className="flex flex-wrap gap-1">
-                  {techs.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2 py-0.5 rounded-full bg-background border border-border/50 text-muted-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            variants={item}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
-          >
-            <Link
-              href="/projects"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
-            >
-              View Projects
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border hover:bg-muted transition-colors font-medium"
-            >
-              About Me
-            </Link>
-          </motion.div>
-
-          <motion.div variants={item} className="pt-12 border-t border-border/50">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
-              <a
-                href="tel:+971567269454"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                +971 56 7269454
-              </a>
-              <span className="hidden sm:block w-1 h-1 rounded-full bg-border/50"></span>
-              <a
-                href="mailto:k3vinsamson@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                k3vinsamson@gmail.com
-              </a>
-              <span className="hidden sm:block w-1 h-1 rounded-full bg-border/50"></span>
-              <a
-                href="https://github.com/kevin-samson"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                GitHub
-              </a>
-              <span className="hidden sm:block w-1 h-1 rounded-full bg-border/50"></span>
-              <a
-                href="https://linkedin.com/in/kevin-samson"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
-        </motion.div>
-      </main>
-    </div>
+      <motion.div
+        custom={5}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--nextra-colors-gray-500,#6b7280)] border-t border-[var(--nextra-colors-gray-200,#e5e7eb)] pt-8"
+      >
+        <a
+          href="mailto:k3vinsamson@gmail.com"
+          className="hover:opacity-70 transition-opacity"
+        >
+          k3vinsamson@gmail.com
+        </a>
+        <a
+          href="https://github.com/kevin-samson"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:opacity-70 transition-opacity"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/kevin-samson"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:opacity-70 transition-opacity"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="tel:+971567269454"
+          className="hover:opacity-70 transition-opacity"
+        >
+          +971 56 726 9454
+        </a>
+      </motion.div>
+    </main>
   );
 }
