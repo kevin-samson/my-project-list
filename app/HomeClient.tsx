@@ -127,12 +127,6 @@ export default function HomeClient() {
         >
           LinkedIn
         </a>
-        <a
-          href="tel:+971567269454"
-          className="hover:opacity-70 transition-opacity"
-        >
-          +971 56 726 9454
-        </a>
       </motion.div>
     </main>
   );
